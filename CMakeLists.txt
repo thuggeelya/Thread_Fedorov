@@ -1,6 +1,8 @@
 cmake_minimum_required(VERSION 3.23)
 project(C__)
+project(C2__)
 
 set(CMAKE_CXX_STANDARD 14)
 
-add_executable(C__ main.cpp)
+add_executable(C__ Task1.cpp)
+add_executable(C2__ Task2.cpp)
