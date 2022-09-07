@@ -68,7 +68,7 @@ int main() {
                                             (long long) 0LL) / nIterations;
     long long avgSingle = std::accumulate(timeSingleThread.begin(), timeSingleThread.end(),
                                           (long long) 0LL) / nIterations;
-    std::cout << "Average time for multiple threads (nanoseconds): " + std::to_string(avgMultiple) << std::endl;
+    std::cout << "\nAverage time for multiple threads (nanoseconds): " + std::to_string(avgMultiple) << std::endl;
     std::cout << "Average time for single thread (nanoseconds)   : " + std::to_string(avgSingle) << std::endl;
     std::cout << "Multithreading is faster in " + std::to_string((double) avgSingle / (double) avgMultiple) + " times";
 }
