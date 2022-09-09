@@ -15,7 +15,6 @@ int main() {
     for (int i = 0; i < nIterations; ++i) {
         std::cout << "\nIteration #" + std::to_string(i) << std::endl;
         std::vector<unsigned long long> sumVector(nThreads, 0);
-        auto start = std::chrono::system_clock::now();
 
         auto separateSum{
                 [&sumVector](unsigned int pos, unsigned long long first, unsigned long long last) {
@@ -29,6 +28,7 @@ int main() {
                 }
         };
 
+        auto start = std::chrono::system_clock::now();
         std::vector<std::thread> threadVector;
 
         for (unsigned int k = 0; k < nThreads; ++k) {
@@ -45,8 +45,7 @@ int main() {
         unsigned long long result = std::accumulate(sumVector.begin(), sumVector.end(), (unsigned long long) 0LL);
         auto end = std::chrono::system_clock::now();
         auto elapsed_nanoseconds = (end - start).count();
-        std::cout << std::to_string(nThreads) + " threads:\n" + std::to_string(result) + ". Time: " +
-                     std::to_string(elapsed_nanoseconds) + " nanoseconds" << std::endl;
+        std::cout << nThreads << " threads:\n" << result << ". Time: " << elapsed_nanoseconds << " nanoseconds" << std::endl;
         timeMultipleThread.at(i) = elapsed_nanoseconds;
 
         start = std::chrono::system_clock::now();
@@ -58,9 +57,13 @@ int main() {
 
         end = std::chrono::system_clock::now();
         elapsed_nanoseconds = (end - start).count();
-        std::cout << "One thread:\n" + std::to_string(res1) + ". Time: " + std::to_string(elapsed_nanoseconds) +
-                     " nanoseconds" << std::endl;
+        std::cout << "One thread:\n" << res1 << ". Time: " << elapsed_nanoseconds << " nanoseconds" << std::endl;
         timeSingleThread.at(i) = elapsed_nanoseconds;
+
+        if (result != res1) {
+            std::cerr << result << " not equals " << res1 << std::endl;
+            break;
+        }
     }
 
     std::cout << std::endl;
