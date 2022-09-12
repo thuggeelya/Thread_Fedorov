@@ -20,7 +20,7 @@ int main() {
                 [&sumVector](unsigned int pos, unsigned long long first, unsigned long long last) {
                     unsigned long long sum = 0;
 
-                    for (unsigned long long i = first; i < last; ++i) {
+                    for (unsigned long long i = first + 1; i < last + 1; ++i) {
                         sum += i;
                     }
 
